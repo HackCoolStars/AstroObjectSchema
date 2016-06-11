@@ -3,14 +3,24 @@ This is a suggestion of a database schema that can be used to store and share da
 
 ## Purpose
 
+## Table Descriptions
 
-## Design Choices
+- Objects. 
+  - This is the primary table. 
+  - One row per object including decimal right ascension and declination and object name.
 
-* All table primary keys are called _id_.
-* Readability and usability over efficiency.
-  * e.g. in-line data instead of
-* CamelCase for table names with multiple words
-  * Lower-case with underscores for field names
+- Measurements + MeasurementTypes
+  - One row per measurement value and uncertainty. 
+  - For example, photometry, spectral types, abundances measurements.
+
+- Observations + Instruments
+  - One row per observation including observation date, telescope, instrument, etc.
+
+- ObjectReferences
+  - Citation history of objects.
+
+- References
+  - Reference lookup table. For example, ADS info and bibtex.
 
 ## How to use 
 
