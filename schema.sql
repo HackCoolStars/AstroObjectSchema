@@ -30,9 +30,9 @@ DROP TABLE IF EXISTS `References`;
 CREATE TABLE `References` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `ads_bibcode` CHAR(128) NULL DEFAULT NULL,
+  `citekey` CHAR(128) NULL DEFAULT NULL,
   `bibtex` MEDIUMTEXT NULL DEFAULT NULL,
   `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  `citekey` CHAR(128) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -45,14 +45,15 @@ DROP TABLE IF EXISTS `Measurements`;
 		
 CREATE TABLE `Measurements` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `object_id` INTEGER NOT NULL DEFAULT NULL,
+  `type` CHAR(128) NOT NULL DEFAULT 'NULL',
   `value` DECIMAL NOT NULL DEFAULT NULL,
   `uncertainty` DECIMAL NOT NULL DEFAULT NULL,
+  `units` CHAR(128) NOT NULL DEFAULT 'NULL',
   `adopted_flag` INTEGER NULL DEFAULT NULL,
-  `object_id` INTEGER NOT NULL DEFAULT NULL,
   `reference_id` INTEGER NULL DEFAULT NULL,
   `observation_id` INTEGER NULL DEFAULT NULL,
-  `type` CHAR(128) NOT NULL DEFAULT 'NULL',
-  `units` CHAR(128) NOT NULL DEFAULT 'NULL',
+  `comment` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) COMMENT 'General example of measurements';
 
@@ -70,8 +71,8 @@ CREATE TABLE `Observations` (
   `date` DATETIME NULL DEFAULT NULL,
   `filename` INTEGER NULL DEFAULT NULL,
   `exposure_time` DECIMAL NULL DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
   `reference_id` INTEGER NULL DEFAULT NULL,
+  `comment` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -113,9 +114,9 @@ DROP TABLE IF EXISTS `ObjectReferences`;
 		
 CREATE TABLE `ObjectReferences` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
   `object_id` INTEGER NOT NULL DEFAULT NULL,
   `reference_id` INTEGER NULL DEFAULT NULL,
+  `comment` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -124,9 +125,9 @@ CREATE TABLE `ObjectReferences` (
 -- ---
 
 ALTER TABLE `Measurements` ADD FOREIGN KEY (object_id) REFERENCES `Objects` (`id`);
+ALTER TABLE `Measurements` ADD FOREIGN KEY (type) REFERENCES `MeasurementTypes` (`id`);
 ALTER TABLE `Measurements` ADD FOREIGN KEY (reference_id) REFERENCES `References` (`id`);
 ALTER TABLE `Measurements` ADD FOREIGN KEY (observation_id) REFERENCES `Observations` (`id`);
-ALTER TABLE `Measurements` ADD FOREIGN KEY (type) REFERENCES `MeasurementTypes` (`id`);
 ALTER TABLE `Observations` ADD FOREIGN KEY (object_id) REFERENCES `Objects` (`id`);
 ALTER TABLE `Observations` ADD FOREIGN KEY (instrument_id) REFERENCES `Instruments` (`id`);
 ALTER TABLE `Observations` ADD FOREIGN KEY (reference_id) REFERENCES `References` (`id`);
@@ -151,15 +152,15 @@ ALTER TABLE `ObjectReferences` ADD FOREIGN KEY (reference_id) REFERENCES `Refere
 
 -- INSERT INTO `Objects` (`id`,`ra`,`dec`,`name`) VALUES
 -- ('','','','');
--- INSERT INTO `References` (`id`,`ads_bibcode`,`bibtex`,`comment`,`citekey`) VALUES
+-- INSERT INTO `References` (`id`,`ads_bibcode`,`citekey`,`bibtex`,`comment`) VALUES
 -- ('','','','','');
--- INSERT INTO `Measurements` (`id`,`value`,`uncertainty`,`adopted_flag`,`object_id`,`reference_id`,`observation_id`,`type`,`units`) VALUES
--- ('','','','','','','','','');
--- INSERT INTO `Observations` (`id`,`object_id`,`instrument_id`,`date`,`filename`,`exposure_time`,`comment`,`reference_id`) VALUES
+-- INSERT INTO `Measurements` (`id`,`object_id`,`type`,`value`,`uncertainty`,`units`,`adopted_flag`,`reference_id`,`observation_id`,`comment`) VALUES
+-- ('','','','','','','','','','');
+-- INSERT INTO `Observations` (`id`,`object_id`,`instrument_id`,`date`,`filename`,`exposure_time`,`reference_id`,`comment`) VALUES
 -- ('','','','','','','','');
 -- INSERT INTO `Instruments` (`id`,`telescope`,`name`,`mode`,`comment`) VALUES
 -- ('','','','','');
 -- INSERT INTO `MeasurementTypes` (`id`,`comment`) VALUES
 -- ('','');
--- INSERT INTO `ObjectReferences` (`id`,`comment`,`object_id`,`reference_id`) VALUES
+-- INSERT INTO `ObjectReferences` (`id`,`object_id`,`reference_id`,`comment`) VALUES
 -- ('','','','');

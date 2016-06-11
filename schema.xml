@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
 <!-- Active URL: file:///home/griatch/Devel/SQLschema/wwwsqldesigner/index.html -->
@@ -65,14 +64,14 @@
 <row name="ads_bibcode" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
+<row name="citekey" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
 <row name="bibtex" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="citekey" null="1" autoincrement="0">
-<datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -82,19 +81,26 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="object_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<row name="type" null="0" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>'NULL'</default><relation table="MeasurementTypes" row="id" />
+</row>
 <row name="value" null="0" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
 <row name="uncertainty" null="0" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
+<row name="units" null="0" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>'NULL'</default></row>
 <row name="adopted_flag" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="object_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Objects" row="id" />
-</row>
 <row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="References" row="id" />
@@ -103,13 +109,9 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Observations" row="id" />
 </row>
-<row name="type" null="0" autoincrement="0">
-<datatype>CHAR(128)</datatype>
-<default>'NULL'</default><relation table="MeasurementTypes" row="id" />
-</row>
-<row name="units" null="0" autoincrement="0">
-<datatype>CHAR(128)</datatype>
-<default>'NULL'</default></row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -136,13 +138,13 @@
 <row name="exposure_time" null="1" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
-<row name="comment" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
 <row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="References" row="id" />
 </row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -182,9 +184,6 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="comment" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
 <row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
@@ -193,8 +192,12 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="References" row="id" />
 </row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
 </sql>
+
