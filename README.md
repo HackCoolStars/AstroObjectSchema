@@ -1,5 +1,6 @@
-# StellarDatabase
-This is a suggestion of a database schema that can be used to store and share data on stars. It was initiated on the CoolStars19 HackDay in Uppsala, Sweden, on June 11 2016.
+# AstroObjectSchema
+
+This is a suggestion of a database schema that can be used to store and share data on stars and other astronomical objects. It was initiated on the CoolStars19 HackDay in Uppsala, Sweden, on June 11 2016. You will find more details [in the wiki](https://github.com/ivh/AstroObjectSchema/wiki).
 
 ## Purpose
 
