@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="380" y="208" name="Objects">
+</datatypes><table x="292" y="107" name="Objects">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -61,7 +61,7 @@
 </key>
 <comment>Stores an astronomical object</comment>
 </table>
-<table x="614" y="568" name="References">
+<table x="321" y="349" name="References">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -78,7 +78,63 @@
 <part>id</part>
 </key>
 </table>
-<table x="914" y="254" name="Measurements">
+<table x="991" y="631" name="Photometry">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="value" null="1" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="uncertainty" null="1" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="units" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default><comment>test comment</comment>
+</row>
+<row name="filter" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Filters" row="id" />
+</row>
+<row name="reference" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="References" row="id" />
+</row>
+<row name="object" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="983" y="439" name="SpectralTypes">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="value" null="1" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default><relation table="SpectralTypesStrings" row="id" />
+</row>
+<row name="adopted_flag" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="uncertainty" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="reference" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="References" row="id" />
+</row>
+<row name="object" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="765" y="224" name="Measurements">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -115,7 +171,29 @@
 </key>
 <comment>General example of measurements</comment>
 </table>
-<table x="908" y="554" name="Observations">
+<table x="1191" y="690" name="Filters">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1153" y="466" name="SpectralTypesStrings">
+<row name="id" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>'NULL'</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="564" y="607" name="Observations">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -147,7 +225,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1165" y="599" name="Instruments">
+<table x="365" y="513" name="Instruments">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -164,7 +242,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1126" y="360" name="MeasurementTypes">
+<table x="1005" y="177" name="MeasurementTypes">
 <row name="id" null="0" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>'NULL'</default></row>
@@ -175,7 +253,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="369" y="568" name="ObjectReferences">
+<table x="521" y="114" name="ObjectReferences">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -195,4 +273,3 @@
 </key>
 </table>
 </sql>
-
