@@ -6,6 +6,8 @@ This is a suggestion of a database schema that can be used to store and share da
 
 ## Table Descriptions
 
+![screenshot](https://github.com/ivh/AstroObjectSchema/blob/master/schema_screenshot.png)
+
 - Objects. 
   - This is the primary table. 
   - One row per object including decimal right ascension and declination and object name.
