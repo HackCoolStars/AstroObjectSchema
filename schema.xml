@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="202" y="50" name="Objects">
+</datatypes><table x="361" y="140" name="Objects">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -61,7 +61,7 @@
 </key>
 <comment>Stores an astronomical object</comment>
 </table>
-<table x="448" y="49" name="References">
+<table x="360" y="364" name="References">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -78,26 +78,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="436" y="264" name="observations">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="861" y="151" name="filters">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="name" null="1" autoincrement="0">
-<datatype>CHAR(128)</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="673" y="69" name="photometry">
+<table x="736" y="253" name="photometry">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -119,11 +100,15 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="filters" row="id" />
 </row>
+<row name="id_Objects" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="672" y="273" name="SpectralTypes">
+<table x="728" y="504" name="SpectralTypes">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -138,17 +123,69 @@
 <row name="adopted_flag" null="1" autoincrement="0">
 <datatype>INT</datatype>
 <default>NULL</default></row>
+<row name="uncertainty" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="id_Objects" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="857" y="315" name="SpectralTypesStrings">
+<table x="701" y="61" name="MoreMeasurements">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="value" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="uncertainty" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="adopted_flag" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="reference" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="References" row="id" />
+</row>
+<row name="id_Objects" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>General example of measurements</comment>
+</table>
+<table x="935" y="318" name="filters">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="912" y="551" name="SpectralTypesStrings">
 <row name="id" null="0" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
 <row name="name" null="0" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>'NULL'</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="55" y="327" name="observations">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
