@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
 <!-- Active URL: file:///home/griatch/Devel/SQLschema/wwwsqldesigner/index.html -->
@@ -37,7 +38,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="380" y="208" name="Objects">
+</datatypes><table x="400" y="295" name="Objects">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -52,20 +53,16 @@
 <row name="name" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
-<row name="reference" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="References" row="id" />
-</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 <comment>Stores an astronomical object</comment>
 </table>
-<table x="614" y="568" name="References">
+<table x="490" y="601" name="References">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="ads_id" null="1" autoincrement="0">
+<row name="ads_bibcode" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
 <row name="bibtex" null="1" autoincrement="0">
@@ -74,11 +71,14 @@
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
+<row name="citekey" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="914" y="254" name="Measurements">
+<table x="788" y="198" name="Measurements">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -91,15 +91,15 @@
 <row name="adopted_flag" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="object" null="0" autoincrement="0">
+<row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
 </row>
-<row name="reference" null="1" autoincrement="0">
+<row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="References" row="id" />
 </row>
-<row name="observation" null="1" autoincrement="0">
+<row name="observation_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Observations" row="id" />
 </row>
@@ -115,15 +115,15 @@
 </key>
 <comment>General example of measurements</comment>
 </table>
-<table x="908" y="554" name="Observations">
+<table x="788" y="524" name="Observations">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="object" null="0" autoincrement="0">
+<row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
 </row>
-<row name="instrument" null="1" autoincrement="0">
+<row name="instrument_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Instruments" row="id" />
 </row>
@@ -139,7 +139,7 @@
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="reference" null="1" autoincrement="0">
+<row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="References" row="id" />
 </row>
@@ -147,7 +147,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1165" y="599" name="Instruments">
+<table x="1030" y="549" name="Instruments">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -160,11 +160,14 @@
 <row name="mode" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="1126" y="360" name="MeasurementTypes">
+<table x="1011" y="293" name="MeasurementTypes">
 <row name="id" null="0" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>'NULL'</default></row>
@@ -175,18 +178,18 @@
 <part>id</part>
 </key>
 </table>
-<table x="369" y="568" name="ObjectReferences">
+<table x="399" y="443" name="ObjectReferences">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="object" null="0" autoincrement="0">
+<row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
 </row>
-<row name="reference" null="1" autoincrement="0">
+<row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="References" row="id" />
 </row>
@@ -195,4 +198,3 @@
 </key>
 </table>
 </sql>
-
