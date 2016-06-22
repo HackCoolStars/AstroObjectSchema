@@ -44,7 +44,7 @@
 <row name="ra" null="1" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
-<row name="dec" null="1" autoincrement="0">
+<row name="decl" null="1" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
