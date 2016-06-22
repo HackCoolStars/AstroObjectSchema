@@ -1,66 +1,63 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
-<!-- Active URL: file:///home/griatch/Devel/SQLschema/wwwsqldesigner/index.html -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/?keyword=default -->
 <sql>
 <datatypes db="mysql">
-	<group label="Numeric" color="rgb(238,238,170)">
-		<type label="Integer" length="0" sql="INTEGER" quote=""/>
-	 	<type label="TINYINT" length="0" sql="TINYINT" quote=""/>
-	 	<type label="SMALLINT" length="0" sql="SMALLINT" quote=""/>
-	 	<type label="MEDIUMINT" length="0" sql="MEDIUMINT" quote=""/>
-	 	<type label="INT" length="0" sql="INT" quote=""/>
-		<type label="BIGINT" length="0" sql="BIGINT" quote=""/>
-		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
-		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
-		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
-	</group>
+  <group label="Numeric" color="rgb(238,238,170)">
+    <type label="Integer" length="0" sql="INTEGER" quote=""/>
+    <type label="TINYINT" length="0" sql="TINYINT" quote=""/>
+    <type label="SMALLINT" length="0" sql="SMALLINT" quote=""/>
+    <type label="MEDIUMINT" length="0" sql="MEDIUMINT" quote=""/>
+    <type label="INT" length="0" sql="INT" quote=""/>
+    <type label="BIGINT" length="0" sql="BIGINT" quote=""/>
+    <type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+    <type label="Single precision" length="0" sql="FLOAT" quote=""/>
+    <type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+  </group>
 
-	<group label="Character" color="rgb(255,200,200)">
-		<type label="Char" length="1" sql="CHAR" quote="'"/>
-		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
-		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
-		<type label="Binary" length="1" sql="BINARY" quote="'"/>
-		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
-		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
-	</group>
+  <group label="Character" color="rgb(255,200,200)">
+    <type label="Char" length="1" sql="CHAR" quote="'"/>
+    <type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+    <type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+    <type label="Binary" length="1" sql="BINARY" quote="'"/>
+    <type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+    <type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+  </group>
 
-	<group label="Date &amp; Time" color="rgb(200,255,200)">
-		<type label="Date" length="0" sql="DATE" quote="'"/>
-		<type label="Time" length="0" sql="TIME" quote="'"/>
-		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
-		<type label="Year" length="0" sql="YEAR" quote=""/>
-		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
-	</group>
-	
-	<group label="Miscellaneous" color="rgb(200,200,255)">
-		<type label="ENUM" length="1" sql="ENUM" quote=""/>
-		<type label="SET" length="1" sql="SET" quote=""/>
-		<type label="Bit" length="0" sql="bit" quote=""/>
-	</group>
+  <group label="Date &amp; Time" color="rgb(200,255,200)">
+    <type label="Date" length="0" sql="DATE" quote="'"/>
+    <type label="Time" length="0" sql="TIME" quote="'"/>
+    <type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+    <type label="Year" length="0" sql="YEAR" quote=""/>
+    <type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+  </group>
+
+  <group label="Miscellaneous" color="rgb(200,200,255)">
+    <type label="ENUM" length="1" sql="ENUM" quote=""/>
+    <type label="SET" length="1" sql="SET" quote=""/>
+    <type label="Bit" length="0" sql="bit" quote=""/>
+  </group>
 </datatypes><table x="400" y="295" name="Objects">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+</row>
 <row name="ra" null="1" autoincrement="0">
 <datatype>DECIMAL</datatype>
-<default>NULL</default><comment>Right Ascension</comment>
-</row>
+<default>NULL</default></row>
 <row name="dec" null="1" autoincrement="0">
 <datatype>DECIMAL</datatype>
-<default>NULL</default><comment>declination</comment>
-</row>
+<default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<comment>Stores an astronomical object</comment>
 </table>
-<table x="490" y="601" name="References">
-<row name="id" null="1" autoincrement="1">
+<table x="490" y="601" name="Reference">
+<row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+</row>
 <row name="ads_bibcode" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
@@ -78,9 +75,9 @@
 </key>
 </table>
 <table x="788" y="198" name="Measurements">
-<row name="id" null="1" autoincrement="1">
+<row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+</row>
 <row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
@@ -103,7 +100,7 @@
 <default>NULL</default></row>
 <row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="References" row="id" />
+<default>NULL</default><relation table="Reference" row="id" />
 </row>
 <row name="observation_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -115,12 +112,11 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<comment>General example of measurements</comment>
 </table>
 <table x="788" y="524" name="Observations">
-<row name="id" null="1" autoincrement="1">
+<row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+</row>
 <row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
@@ -140,7 +136,7 @@
 <default>NULL</default></row>
 <row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="References" row="id" />
+<default>NULL</default><relation table="Reference" row="id" />
 </row>
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
@@ -150,9 +146,9 @@
 </key>
 </table>
 <table x="1030" y="549" name="Instruments">
-<row name="id" null="1" autoincrement="1">
+<row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+</row>
 <row name="telescope" null="1" autoincrement="0">
 <datatype>CHAR(128)</datatype>
 <default>NULL</default></row>
@@ -172,7 +168,7 @@
 <table x="1011" y="293" name="MeasurementTypes">
 <row name="id" null="0" autoincrement="0">
 <datatype>CHAR(128)</datatype>
-<default>'NULL'</default></row>
+</row>
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
@@ -181,16 +177,16 @@
 </key>
 </table>
 <table x="399" y="443" name="ObjectReferences">
-<row name="id" null="1" autoincrement="1">
+<row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+</row>
 <row name="object_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Objects" row="id" />
 </row>
 <row name="reference_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="References" row="id" />
+<default>NULL</default><relation table="Reference" row="id" />
 </row>
 <row name="comment" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
@@ -200,4 +196,3 @@
 </key>
 </table>
 </sql>
-
