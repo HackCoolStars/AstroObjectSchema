@@ -1,166 +1,198 @@
--- ---
--- Globals
--- ---
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/?keyword=default -->
+<sql>
+<datatypes db="mysql">
+  <group label="Numeric" color="rgb(238,238,170)">
+    <type label="Integer" length="0" sql="INTEGER" quote=""/>
+    <type label="TINYINT" length="0" sql="TINYINT" quote=""/>
+    <type label="SMALLINT" length="0" sql="SMALLINT" quote=""/>
+    <type label="MEDIUMINT" length="0" sql="MEDIUMINT" quote=""/>
+    <type label="INT" length="0" sql="INT" quote=""/>
+    <type label="BIGINT" length="0" sql="BIGINT" quote=""/>
+    <type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+    <type label="Single precision" length="0" sql="FLOAT" quote=""/>
+    <type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+  </group>
 
--- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
--- SET FOREIGN_KEY_CHECKS=0;
+  <group label="Character" color="rgb(255,200,200)">
+    <type label="Char" length="1" sql="CHAR" quote="'"/>
+    <type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+    <type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+    <type label="Binary" length="1" sql="BINARY" quote="'"/>
+    <type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+    <type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+  </group>
 
--- ---
--- Table 'Objects'
---
--- ---
+  <group label="Date &amp; Time" color="rgb(200,255,200)">
+    <type label="Date" length="0" sql="DATE" quote="'"/>
+    <type label="Time" length="0" sql="TIME" quote="'"/>
+    <type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+    <type label="Year" length="0" sql="YEAR" quote=""/>
+    <type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+  </group>
 
-DROP TABLE IF EXISTS `Objects`;
-
-CREATE TABLE `Objects` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `ra` DECIMAL NULL DEFAULT NULL,
-  `decl` DECIMAL NULL DEFAULT NULL,
-  `name` CHAR(128) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'Reference'
---
--- ---
-
-DROP TABLE IF EXISTS `Reference`;
-
-CREATE TABLE `Reference` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `ads_bibcode` CHAR(128) NULL DEFAULT NULL,
-  `citekey` CHAR(128) NULL DEFAULT NULL,
-  `bibtex` MEDIUMTEXT NULL DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'Measurements'
---
--- ---
-
-DROP TABLE IF EXISTS `Measurements`;
-
-CREATE TABLE `Measurements` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `object_id` INTEGER NOT NULL DEFAULT NULL,
-  `type` CHAR(128) NOT NULL DEFAULT 'NULL',
-  `val` DECIMAL NOT NULL DEFAULT NULL,
-  `uncertainty` DECIMAL NOT NULL DEFAULT NULL,
-  `units` CHAR(128) NOT NULL DEFAULT 'NULL',
-  `adopted_flag` INTEGER NULL DEFAULT NULL,
-  `reference_id` INTEGER NULL DEFAULT NULL,
-  `observation_id` INTEGER NULL DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'Observations'
---
--- ---
-
-DROP TABLE IF EXISTS `Observations`;
-
-CREATE TABLE `Observations` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `object_id` INTEGER NOT NULL DEFAULT NULL,
-  `instrument_id` INTEGER NULL DEFAULT NULL,
-  `obs_date` DATETIME NULL DEFAULT NULL,
-  `filename` INTEGER NULL DEFAULT NULL,
-  `exposure_time` DECIMAL NULL DEFAULT NULL,
-  `reference_id` INTEGER NULL DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'Instruments'
---
--- ---
-
-DROP TABLE IF EXISTS `Instruments`;
-
-CREATE TABLE `Instruments` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `telescope` CHAR(128) NULL DEFAULT NULL,
-  `name` CHAR(128) NULL DEFAULT NULL,
-  `mode` CHAR(128) NULL DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'MeasurementTypes'
---
--- ---
-
-DROP TABLE IF EXISTS `MeasurementTypes`;
-
-CREATE TABLE `MeasurementTypes` (
-  `id` CHAR(128) NOT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'ObjectReferences'
---
--- ---
-
-DROP TABLE IF EXISTS `ObjectReferences`;
-
-CREATE TABLE `ObjectReferences` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `object_id` INTEGER NOT NULL DEFAULT NULL,
-  `reference_id` INTEGER NULL DEFAULT NULL,
-  `comment` MEDIUMTEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Foreign Keys
--- ---
-
-ALTER TABLE `Measurements` ADD FOREIGN KEY (object_id) REFERENCES `Objects` (`id`);
-ALTER TABLE `Measurements` ADD FOREIGN KEY (type) REFERENCES `MeasurementTypes` (`id`);
-ALTER TABLE `Measurements` ADD FOREIGN KEY (reference_id) REFERENCES `Reference` (`id`);
-ALTER TABLE `Measurements` ADD FOREIGN KEY (observation_id) REFERENCES `Observations` (`id`);
-ALTER TABLE `Observations` ADD FOREIGN KEY (object_id) REFERENCES `Objects` (`id`);
-ALTER TABLE `Observations` ADD FOREIGN KEY (instrument_id) REFERENCES `Instruments` (`id`);
-ALTER TABLE `Observations` ADD FOREIGN KEY (reference_id) REFERENCES `Reference` (`id`);
-ALTER TABLE `ObjectReferences` ADD FOREIGN KEY (object_id) REFERENCES `Objects` (`id`);
-ALTER TABLE `ObjectReferences` ADD FOREIGN KEY (reference_id) REFERENCES `Reference` (`id`);
-
--- ---
--- Table Properties
--- ---
-
--- ALTER TABLE `Objects` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Reference` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Measurements` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Observations` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Instruments` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `MeasurementTypes` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `ObjectReferences` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ---
--- Test Data
--- ---
-
--- INSERT INTO `Objects` (`id`,`ra`,`decl`,`name`) VALUES
--- ('','','','');
--- INSERT INTO `Reference` (`id`,`ads_bibcode`,`citekey`,`bibtex`,`comment`) VALUES
--- ('','','','','');
--- INSERT INTO `Measurements` (`id`,`object_id`,`type`,`val`,`uncertainty`,`units`,`adopted_flag`,`reference_id`,`observation_id`,`comment`) VALUES
--- ('','','','','','','','','','');
--- INSERT INTO `Observations` (`id`,`object_id`,`instrument_id`,`obs_date`,`filename`,`exposure_time`,`reference_id`,`comment`) VALUES
--- ('','','','','','','','');
--- INSERT INTO `Instruments` (`id`,`telescope`,`name`,`mode`,`comment`) VALUES
--- ('','','','','');
--- INSERT INTO `MeasurementTypes` (`id`,`comment`) VALUES
--- ('','');
--- INSERT INTO `ObjectReferences` (`id`,`object_id`,`reference_id`,`comment`) VALUES
--- ('','','','');
+  <group label="Miscellaneous" color="rgb(200,200,255)">
+    <type label="ENUM" length="1" sql="ENUM" quote=""/>
+    <type label="SET" length="1" sql="SET" quote=""/>
+    <type label="Bit" length="0" sql="bit" quote=""/>
+  </group>
+</datatypes><table x="400" y="295" name="Objects">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="ra" null="1" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="decl" null="1" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="490" y="601" name="Reference">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="ads_bibcode" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<row name="citekey" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<row name="bibtex" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="788" y="198" name="Measurements">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="object_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<row name="type" null="0" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>'NULL'</default><relation table="MeasurementTypes" row="id" />
+</row>
+<row name="val" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="uncertainty" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="units" null="0" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>'NULL'</default></row>
+<row name="adopted_flag" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="reference_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Reference" row="id" />
+</row>
+<row name="observation_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Observations" row="id" />
+</row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="788" y="524" name="Observations">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="object_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<row name="instrument_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Instruments" row="id" />
+</row>
+<row name="obs_date" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="filename" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="exposure_time" null="1" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>NULL</default></row>
+<row name="reference_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Reference" row="id" />
+</row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1030" y="549" name="Instruments">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="telescope" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<row name="mode" null="1" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+<default>NULL</default></row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1011" y="293" name="MeasurementTypes">
+<row name="id" null="0" autoincrement="0">
+<datatype>CHAR(128)</datatype>
+</row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="399" y="443" name="ObjectReferences">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="object_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Objects" row="id" />
+</row>
+<row name="reference_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Reference" row="id" />
+</row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+</sql>
